@@ -182,15 +182,6 @@
               "valueCode": "horizontal"
             }
           ],
-          "initial": [
-            {
-              "valueCoding": {
-                "system": "http://hl7.org/fhir/administrative-gender",
-                "code": "female",
-                "display": "Female"
-              }
-            }
-          ],
           "answerOption": [
             {
               "valueCoding": {
@@ -213,7 +204,15 @@
                   {
                     "language": "sw",
                     "value": "Mwanaume"
-                  }]
+                  }
+                ]
+              }
+            },
+            {
+              "valueCoding": {
+                "system": "http://hl7.org/fhir/administrative-gender",
+                "code": "other",
+                "display": "Other"
               }
             }
           ]
