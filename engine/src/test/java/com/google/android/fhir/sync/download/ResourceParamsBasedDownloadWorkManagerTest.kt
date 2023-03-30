@@ -48,7 +48,11 @@ class ResourceParamsBasedDownloadWorkManagerTest {
 
     val urlsToDownload = mutableListOf<String>()
     do {
+<<<<<<< HEAD
       val url = downloadManager.getNextRequest()?.let { (it as UrlRequest).url }
+=======
+      val url = downloadManager.getNextRequestUrl()
+>>>>>>> d54fed6c (Configurable care demo)
       if (url != null) {
         urlsToDownload.add(url)
       }
@@ -72,7 +76,11 @@ class ResourceParamsBasedDownloadWorkManagerTest {
 
     val urlsToDownload = mutableListOf<String>()
     do {
+<<<<<<< HEAD
       val url = downloadManager.getNextRequest()?.let { (it as UrlRequest).url }
+=======
+      val url = downloadManager.getNextRequestUrl()
+>>>>>>> d54fed6c (Configurable care demo)
       if (url != null) {
         urlsToDownload.add(url)
       }
@@ -112,7 +120,11 @@ class ResourceParamsBasedDownloadWorkManagerTest {
           mapOf(ResourceType.Patient to emptyMap()),
           TestResourceParamsBasedDownloadWorkManagerContext("2022-06-28")
         )
+<<<<<<< HEAD
       val url = downloadManager.getNextRequest()?.let { (it as UrlRequest).url }
+=======
+      val url = downloadManager.getNextRequestUrl()
+>>>>>>> d54fed6c (Configurable care demo)
       assertThat(url).isEqualTo("Patient?_sort=_lastUpdated&_lastUpdated=gt2022-06-28")
     }
 
@@ -130,7 +142,11 @@ class ResourceParamsBasedDownloadWorkManagerTest {
           ),
           TestResourceParamsBasedDownloadWorkManagerContext("2022-07-07")
         )
+<<<<<<< HEAD
       val url = downloadManager.getNextRequest()?.let { (it as UrlRequest).url }
+=======
+      val url = downloadManager.getNextRequestUrl()
+>>>>>>> d54fed6c (Configurable care demo)
       assertThat(url).isEqualTo("Patient?_lastUpdated=2022-06-28&_sort=status")
     }
 
@@ -142,7 +158,11 @@ class ResourceParamsBasedDownloadWorkManagerTest {
           mapOf(ResourceType.Patient to mapOf(SyncDataParams.LAST_UPDATED_KEY to "gt2022-06-28")),
           TestResourceParamsBasedDownloadWorkManagerContext("2022-07-07")
         )
+<<<<<<< HEAD
       val url = downloadManager.getNextRequest()?.let { (it as UrlRequest).url }
+=======
+      val url = downloadManager.getNextRequestUrl()
+>>>>>>> d54fed6c (Configurable care demo)
       assertThat(url).isEqualTo("Patient?_lastUpdated=gt2022-06-28&_sort=_lastUpdated")
     }
 
@@ -154,7 +174,11 @@ class ResourceParamsBasedDownloadWorkManagerTest {
           mapOf(ResourceType.Patient to mapOf(Patient.ADDRESS_CITY.paramName to "NAIROBI")),
           NoOpResourceParamsBasedDownloadWorkManagerContext
         )
+<<<<<<< HEAD
       val actual = downloadManager.getNextRequest()?.let { (it as UrlRequest).url }
+=======
+      val actual = downloadManager.getNextRequestUrl()
+>>>>>>> d54fed6c (Configurable care demo)
       assertThat(actual).isEqualTo("Patient?address-city=NAIROBI&_sort=_lastUpdated")
     }
 
@@ -166,7 +190,11 @@ class ResourceParamsBasedDownloadWorkManagerTest {
           mapOf(ResourceType.Patient to mapOf(Patient.ADDRESS_CITY.paramName to "NAIROBI")),
           TestResourceParamsBasedDownloadWorkManagerContext("")
         )
+<<<<<<< HEAD
       val actual = downloadManager.getNextRequest()?.let { (it as UrlRequest).url }
+=======
+      val actual = downloadManager.getNextRequestUrl()
+>>>>>>> d54fed6c (Configurable care demo)
       assertThat(actual).isEqualTo("Patient?address-city=NAIROBI&_sort=_lastUpdated")
     }
 

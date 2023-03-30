@@ -16,17 +16,24 @@
 
 package com.google.android.fhir.sync.download
 
+<<<<<<< HEAD
 import com.google.android.fhir.logicalId
 import com.google.android.fhir.sync.BundleRequest
+=======
+>>>>>>> d54fed6c (Configurable care demo)
 import com.google.android.fhir.sync.DataSource
 import com.google.android.fhir.sync.DownloadState
 import com.google.android.fhir.sync.DownloadWorkManager
 import com.google.android.fhir.sync.Request
 import com.google.android.fhir.sync.UrlRequest
 import com.google.common.truth.Truth.assertThat
+<<<<<<< HEAD
 import java.util.LinkedList
 import java.util.Queue
 import kotlinx.coroutines.flow.collectIndexed
+=======
+import java.net.UnknownHostException
+>>>>>>> d54fed6c (Configurable care demo)
 import kotlinx.coroutines.runBlocking
 import org.hl7.fhir.exceptions.FHIRException
 import org.hl7.fhir.r4.model.Bundle
@@ -46,6 +53,7 @@ import org.robolectric.RobolectricTestRunner
 class DownloaderImplTest {
 
   @Test
+<<<<<<< HEAD
   fun `downloader should download all the requests even when some fail`() = runBlocking {
     val requests =
       listOf(
@@ -93,6 +101,42 @@ class DownloaderImplTest {
             else -> OperationOutcome()
           }
         }
+=======
+  fun `downloader with patient and observations should download successfully`() = runBlocking {
+    val downloader =
+      DownloaderImpl(
+        object : DataSource {
+          override suspend fun download(path: String): Resource {
+            return when {
+              path.contains("summary") -> Bundle().apply { total = 1 }
+              path.contains("patient-page1") ->
+                searchPageParamToSearchResponseBundleMap["patient-page1"]!!
+              path.contains("patient-page2") ->
+                searchPageParamToSearchResponseBundleMap["patient-page2"]!!
+              path.contains("observation-page1") ->
+                searchPageParamToSearchResponseBundleMap["observation-page1"]!!
+              path.contains("observation-page2") ->
+                searchPageParamToSearchResponseBundleMap["observation-page2"]!!
+              else -> OperationOutcome()
+            }
+          }
+
+          override suspend fun upload(bundle: Bundle): Resource {
+            TODO("Not yet implemented")
+          }
+        },
+        ResourceParamsBasedDownloadWorkManager(
+          mapOf(
+            ResourceType.Patient to mapOf("param" to "patient-page1"),
+            ResourceType.Observation to mapOf("param" to "observation-page1")
+          ),
+          NoOpResourceParamsBasedDownloadWorkManagerContext
+        )
+      )
+
+    val result = mutableListOf<DownloadState>()
+    downloader.download().collect { result.add(it) }
+>>>>>>> d54fed6c (Configurable care demo)
 
         private fun download(bundle: Bundle): Resource {
           return Bundle().apply {
@@ -166,6 +210,7 @@ class DownloaderImplTest {
                       resource = Patient().apply { id = "pa-123" }
                     }
                   )
+<<<<<<< HEAD
                 }
               "Encounter" ->
                 Bundle().apply {
@@ -189,10 +234,120 @@ class DownloaderImplTest {
                     }
                   )
                 }
+=======
+                else -> OperationOutcome()
+              }
+            }
+
+            override suspend fun upload(bundle: Bundle): Resource {
+              TODO("Upload not tested in this path")
+            }
+          },
+          ResourceParamsBasedDownloadWorkManager(
+            mapOf(
+              ResourceType.Patient to mapOf("param" to "patient-page1"),
+              ResourceType.Observation to mapOf("param" to "observation-page1")
+            ),
+            NoOpResourceParamsBasedDownloadWorkManagerContext
+          )
+        )
+
+      val result = mutableListOf<DownloadState>()
+      downloader.download().collect { result.add(it) }
+
+      assertThat(result.filterIsInstance<DownloadState.Started>())
+        .containsExactly(
+          DownloadState.Started(ResourceType.Bundle, 2), // 1 patient and 1 observation
+        )
+
+      assertThat(result.filterIsInstance<DownloadState.Failure>()).hasSize(2)
+
+      assertThat(result.filterIsInstance<DownloadState.Failure>().map { it.syncError.resourceType })
+        .containsExactly(ResourceType.Patient, ResourceType.Observation)
+        .inOrder()
+      assertThat(
+          result.filterIsInstance<DownloadState.Failure>().map { it.syncError.exception.message }
+        )
+        .containsExactly(
+          "Server couldn't fulfil the request.",
+          "Url host can't be found. Check if device is connected to internet."
+        )
+        .inOrder()
+    }
+
+  @Test
+  fun `downloader with patient and observations should continue to download observations if patient download fail`() =
+    runBlocking {
+      val downloader =
+        DownloaderImpl(
+          object : DataSource {
+            override suspend fun download(path: String): Resource {
+              return when {
+                path.contains("summary") -> Bundle().apply { total = 1 }
+                path.contains("patient-page1") || path.contains("patient-page2") ->
+                  OperationOutcome().apply {
+                    addIssue(
+                      OperationOutcome.OperationOutcomeIssueComponent().apply {
+                        diagnostics = "Server couldn't fulfil the request."
+                      }
+                    )
+                  }
+                path.contains("observation-page1") ->
+                  searchPageParamToSearchResponseBundleMap["observation-page1"]!!
+                path.contains("observation-page2") ->
+                  searchPageParamToSearchResponseBundleMap["observation-page2"]!!
+                else -> OperationOutcome()
+              }
+            }
+
+            override suspend fun upload(bundle: Bundle): Resource {
+              TODO("Not yet implemented")
+            }
+          },
+          ResourceParamsBasedDownloadWorkManager(
+            mapOf(
+              ResourceType.Patient to mapOf("param" to "patient-page1"),
+              ResourceType.Observation to mapOf("param" to "observation-page1")
+            ),
+            NoOpResourceParamsBasedDownloadWorkManagerContext
+          )
+        )
+
+      val result = mutableListOf<DownloadState>()
+      downloader.download().collect { result.add(it) }
+
+      assertThat(result.filterIsInstance<DownloadState.Started>())
+        .containsExactly(
+          DownloadState.Started(ResourceType.Bundle, 2), // 1 patient and 1 observation
+        )
+
+      assertThat(result.filterIsInstance<DownloadState.Failure>().map { it.syncError.resourceType })
+        .containsExactly(ResourceType.Patient)
+
+      assertThat(
+          result
+            .filterIsInstance<DownloadState.Success>()
+            .flatMap { it.resources }
+            .filterIsInstance<Observation>()
+        )
+        .hasSize(2)
+    }
+
+  @Test
+  fun `downloader should emit Started state`() = runBlocking {
+    val downloader =
+      DownloaderImpl(
+        object : DataSource {
+          override suspend fun download(path: String): Resource {
+            return when {
+              path.contains("patient-page1") ->
+                searchPageParamToSearchResponseBundleMap["patient-page1"]!!
+>>>>>>> d54fed6c (Configurable care demo)
               else -> OperationOutcome()
             }
           }
 
+<<<<<<< HEAD
           private fun download(bundle: Bundle): Resource {
             return Bundle().apply {
               type = Bundle.BundleType.BATCHRESPONSE
@@ -214,6 +369,34 @@ class DownloaderImplTest {
                     }
                 }
               )
+=======
+          override suspend fun upload(bundle: Bundle): Resource {
+            throw UnsupportedOperationException()
+          }
+        },
+        ResourceParamsBasedDownloadWorkManager(
+          mapOf(ResourceType.Patient to mapOf("param" to "patient-page1")),
+          NoOpResourceParamsBasedDownloadWorkManagerContext
+        )
+      )
+
+    val result = mutableListOf<DownloadState>()
+    downloader.download().collect { value -> result.add(value) }
+
+    assertThat(result.first()).isInstanceOf(DownloadState.Started::class.java)
+  }
+
+  @Test
+  fun `downloader should emit Success state`() = runBlocking {
+    val downloader =
+      DownloaderImpl(
+        object : DataSource {
+          override suspend fun download(path: String): Resource {
+            return when {
+              path.contains("patient-page1") ->
+                searchPageParamToSearchResponseBundleMap["patient-page1"]!!.apply { total = 1 }
+              else -> OperationOutcome()
+>>>>>>> d54fed6c (Configurable care demo)
             }
           }
 
@@ -226,8 +409,20 @@ class DownloaderImplTest {
           override suspend fun upload(request: BundleRequest): Resource {
             throw UnsupportedOperationException()
           }
+<<<<<<< HEAD
         }
       val downloader = DownloaderImpl(testDataSource, TestDownloadWorkManager(requests))
+=======
+        },
+        ResourceParamsBasedDownloadWorkManager(
+          mapOf(ResourceType.Patient to mapOf("param" to "patient-page1")),
+          NoOpResourceParamsBasedDownloadWorkManagerContext
+        )
+      )
+
+    val result = mutableListOf<DownloadState>()
+    downloader.download().collect { value -> result.add(value) }
+>>>>>>> d54fed6c (Configurable care demo)
 
       val result = mutableListOf<DownloadState>()
       downloader.download().collectIndexed { _, value -> result.add(value) }

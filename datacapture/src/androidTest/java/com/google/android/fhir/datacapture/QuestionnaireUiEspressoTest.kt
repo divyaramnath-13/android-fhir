@@ -159,6 +159,7 @@ class QuestionnaireUiEspressoTest {
   }
 
   @Test
+<<<<<<< HEAD
   fun decimalTextEdit_typingInvalidTextShouldShowError() {
     buildFragmentFromQuestionnaire("/text_questionnaire_decimal.json")
 
@@ -170,6 +171,8 @@ class QuestionnaireUiEspressoTest {
   }
 
   @Test
+=======
+>>>>>>> d54fed6c (Configurable care demo)
   fun dateTimePicker_shouldShowErrorForWrongDate() {
     buildFragmentFromQuestionnaire("/component_date_time_picker.json")
 

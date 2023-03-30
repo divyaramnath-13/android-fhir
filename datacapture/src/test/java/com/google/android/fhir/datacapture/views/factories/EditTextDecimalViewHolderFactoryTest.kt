@@ -118,7 +118,11 @@ class EditTextDecimalViewHolderFactoryTest {
   }
 
   @Test
+<<<<<<< HEAD
   fun `should set QuestionnaireResponseItemAnswer if text is valid`() {
+=======
+  fun shouldSetQuestionnaireResponseItemAnswerIfValidText() {
+>>>>>>> d54fed6c (Configurable care demo)
     var answers: List<QuestionnaireResponse.QuestionnaireResponseItemAnswerComponent>? = null
     val questionnaireViewItem =
       QuestionnaireViewItem(
@@ -137,7 +141,11 @@ class EditTextDecimalViewHolderFactoryTest {
   }
 
   @Test
+<<<<<<< HEAD
   fun `should set QuestionnaireResponseItemAnswer to empty`() {
+=======
+  fun shouldSetQuestionnaireResponseItemAnswerToEmpty() {
+>>>>>>> d54fed6c (Configurable care demo)
     var answers: List<QuestionnaireResponse.QuestionnaireResponseItemAnswerComponent>? = null
     val questionnaireViewItem =
       QuestionnaireViewItem(

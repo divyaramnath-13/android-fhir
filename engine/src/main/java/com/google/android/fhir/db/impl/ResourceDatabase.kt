@@ -37,19 +37,19 @@ import com.google.android.fhir.db.impl.entities.UriIndexEntity
 
 @Database(
   entities =
-    [
-      ResourceEntity::class,
-      StringIndexEntity::class,
-      ReferenceIndexEntity::class,
-      TokenIndexEntity::class,
-      QuantityIndexEntity::class,
-      UriIndexEntity::class,
-      DateIndexEntity::class,
-      DateTimeIndexEntity::class,
-      NumberIndexEntity::class,
-      LocalChangeEntity::class,
-      PositionIndexEntity::class
-    ],
+  [
+    ResourceEntity::class,
+    StringIndexEntity::class,
+    ReferenceIndexEntity::class,
+    TokenIndexEntity::class,
+    QuantityIndexEntity::class,
+    UriIndexEntity::class,
+    DateIndexEntity::class,
+    DateTimeIndexEntity::class,
+    NumberIndexEntity::class,
+    LocalChangeEntity::class,
+    PositionIndexEntity::class
+  ],
   version = 3,
   exportSchema = true
 )
