@@ -24,8 +24,10 @@ import com.google.android.fhir.FhirEngineConfiguration
 import com.google.android.fhir.FhirEngineProvider
 import com.google.android.fhir.ServerConfiguration
 import com.google.android.fhir.datacapture.DataCaptureConfig
+import com.google.android.fhir.datacapture.QuestionnaireFragment
 import com.google.android.fhir.datacapture.XFhirQueryResolver
 import com.google.android.fhir.demo.data.FhirSyncWorker
+import com.google.android.fhir.demo.factory.SensorCaptureFactory
 import com.google.android.fhir.search.search
 import com.google.android.fhir.sync.Sync
 import com.google.android.fhir.sync.remote.HttpLogger
@@ -78,5 +80,37 @@ class FhirApplication : Application(), DataCaptureConfig.Provider {
     fun dataStore(context: Context) = (context.applicationContext as FhirApplication).dataStore
   }
 
-  override fun getDataCaptureConfig(): DataCaptureConfig = dataCaptureConfig ?: DataCaptureConfig()
+  // override fun getDataCaptureConfig(): DataCaptureConfig = dataCaptureConfig ?: DataCaptureConfig()
+
+  override fun getDataCaptureConfig(): DataCaptureConfig {
+    return  DataCaptureConfig(questionnaireItemViewHolderFactoryMatchersProviderFactory = {
+
+        tag -> "sensor_capture"
+      object : QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatchersProvider() {
+
+        override fun get(): List<QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatcher> {
+          return listOf(
+            QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatcher(SensorCaptureFactory) {
+                questionnaireItem ->
+              questionnaireItem.getExtensionByUrl(SensorCaptureFactory.WIDGET_EXTENSION).let {
+                if (it == null) false else it.value.toString() == SensorCaptureFactory.WIDGET_TYPE
+              }
+            },
+
+            // QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatcher(
+            //   BarCodeReaderViewHolderFactory
+            // ) { questionnaireItem
+            //   ->
+            //   questionnaireItem.getExtensionByUrl(BarCodeReaderViewHolderFactory.WIDGET_EXTENSION)
+            //     .let {
+            //       if (it == null) false
+            //       else it.value.toString() == BarCodeReaderViewHolderFactory.WIDGET_TYPE
+            //     }
+            // }
+          )
+        }
+
+      }
+    })
+  }
 }

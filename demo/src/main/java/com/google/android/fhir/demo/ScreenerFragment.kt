@@ -83,7 +83,8 @@ class ScreenerFragment : Fragment(R.layout.screener_encounter_fragment) {
     childFragmentManager.commit {
       add(
         R.id.add_patient_container,
-        QuestionnaireFragment.builder().setQuestionnaire(viewModel.questionnaire).build(),
+        QuestionnaireFragment.builder().setQuestionnaire(viewModel.questionnaire)
+          .setCustomQuestionnaireItemViewHolderFactoryMatchersProvider("sensor_capture").build(),
         QUESTIONNAIRE_FRAGMENT_TAG
       )
     }
