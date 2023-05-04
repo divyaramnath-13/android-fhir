@@ -84,7 +84,9 @@ class ScreenerFragment : Fragment(R.layout.screener_encounter_fragment) {
       add(
         R.id.add_patient_container,
         QuestionnaireFragment.builder().setQuestionnaire(viewModel.questionnaire)
-          .setCustomQuestionnaireItemViewHolderFactoryMatchersProvider("sensor_capture").build(),
+          .setCustomQuestionnaireItemViewHolderFactoryMatchersProvider("sensor_capture")
+          .setShowSubmitButton(false)
+          .build(),
         QUESTIONNAIRE_FRAGMENT_TAG
       )
     }
