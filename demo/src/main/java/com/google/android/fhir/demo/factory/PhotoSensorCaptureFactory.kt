@@ -35,7 +35,7 @@ object PhotoSensorCaptureFactory :
 
       private fun displayTakePhotoButton(/*questionnaireItem: Questionnaire.QuestionnaireItemComponent*/) {
         capturePhotoButton.visibility = View.VISIBLE
-        capturePhotoButton.setText("Capture Photo")
+        capturePhotoButton.text = "Capture Photo"
       }
 
       private fun onTakePhotoButtonClicked(view: View/*, questionnaireItem: Questionnaire.QuestionnaireItemComponent*/) {

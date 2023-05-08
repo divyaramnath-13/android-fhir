@@ -1,150 +1,8 @@
 {
   "resourceType": "Questionnaire",
-  "id": "patient-registration-sample",
+  "id": "sensor-capture-questionnaire",
   "status": "active",
-  "subjectType": [
-    "Patient"
-  ],
-  "extension": [
-    {
-      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemExtractionContext",
-      "valueExpression": {
-        "language": "application/x-fhir-query",
-        "expression": "Patient",
-        "name": "patient"
-      }
-    }
-  ],
   "item": [
-    {
-      "linkId": "PR",
-      "type": "group",
-      "extension": [
-        {
-          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-          "valueCodeableConcept": {
-            "coding": [
-              {
-                "system": "http://hl7.org/fhir/questionnaire-item-control",
-                "code": "page",
-                "display": "Page"
-              }
-            ],
-            "text": "Page"
-          }
-        }
-      ],
-      "text": "Patient info",
-      "item": [
-        {
-          "linkId": "PR-name",
-          "type": "group",
-          "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.name",
-          "item": [
-            {
-              "extension": [
-                {
-                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
-                  "valueExpression": {
-                    "language": "text/fhirpath",
-                    "expression": "Patient.name.given",
-                    "name": "patientName"
-                  }
-                }
-              ],
-              "linkId": "PR-name-text",
-              "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.name.given",
-              "type": "string",
-              "required": true,
-              "text": "First Name"
-            },
-            {
-              "extension": [
-                {
-                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
-                  "valueExpression": {
-                    "language": "text/fhirpath",
-                    "expression": "Patient.name.family",
-                    "name": "patientFamily"
-                  }
-                }
-              ],
-              "linkId": "PR-name-family",
-              "definition": "http://hl7.org/fhir/StructureDefinition/datatypes#HumanName.family",
-              "type": "string",
-              "required": true,
-              "text": "Family Name"
-            }
-          ]
-        },
-        {
-          "extension": [
-            {
-              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
-              "valueExpression": {
-                "language": "text/fhirpath",
-                "expression": "Patient.birthDate",
-                "name": "patientBirthDate"
-              }
-            }
-          ],
-          "linkId": "patient-0-birth-date",
-          "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.birthDate",
-          "type": "date",
-          "required": true,
-          "text": "Date of Birth"
-        },
-        {
-          "linkId": "patient-0-gender",
-          "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.gender",
-          "type": "choice",
-          "text": "Gender",
-          "extension": [
-            {
-              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
-              "valueExpression": {
-                "system": "http://hl7.org/fhir/administrative-gender",
-                "language": "text/fhirpath",
-                "expression": "Patient.gender",
-                "name": "patientGender"
-              }
-            },
-            {
-              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
-              "valueCodeableConcept": {
-                "coding": [
-                  {
-                    "system": "http://hl7.org/fhir/questionnaire-item-control",
-                    "code": "radio-button",
-                    "display": "Radio Button"
-                  }
-                ]
-              }
-            },
-            {
-              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-choiceOrientation",
-              "valueCode": "horizontal"
-            }
-          ],
-          "answerOption": [
-            {
-              "valueCoding": {
-                "system": "http://hl7.org/fhir/administrative-gender",
-                "code": "female",
-                "display": "Female"
-              }
-            },
-            {
-              "valueCoding": {
-                "system": "http://hl7.org/fhir/administrative-gender",
-                "code": "male",
-                "display": "Male"
-              }
-            }
-          ]
-        }
-      ]
-    },
     {
       "linkId": "sensing-capture-group",
       "type": "group",
@@ -165,18 +23,25 @@
       ],
       "item": [
         {
-          "linkId": "api-call-button",
-          "text": "Anaemia Study",
-          "type": "display"
-        },
-        {
           "linkId": "ppg-capture-api-call",
           "extension": [
             {
               "url": "http://external-api-call/sensing-backbone",
               "valueCode": "ppg-capture"
             }
+          ],
+          "item": [
+            {
+              "linkId": "workaround",
+              "type": "display",
+              "text": "ppg-display-capture-id"
+            }
           ]
+        },
+        {
+          "linkId": "ppg-display-capture-id",
+          "type": "display",
+          "text": "ppg-display-capture-id"
         },
         {
           "linkId": "photo-capture-api-call",
