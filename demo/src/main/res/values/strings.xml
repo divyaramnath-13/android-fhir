@@ -68,4 +68,8 @@
   <string name="last_sync">Last sync</string>
   <string name="syncing">Syncing</string>
   <string name="sync">Sync</string>
+
+  <string name="capture_ppg_data">Capture PPG Data</string>
+  <string name="capture_photo">Capture Photo</string>
+
 </resources>

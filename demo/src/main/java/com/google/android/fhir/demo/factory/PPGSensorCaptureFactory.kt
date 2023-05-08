@@ -1,37 +1,38 @@
 package com.google.android.fhir.demo.factory
 
-import android.content.Intent
-import android.provider.MediaStore
 import android.view.View
 import android.widget.Button
-import com.google.android.fhir.datacapture.R
+import android.widget.TextView
+// import com.google.android.fhir.demo.R
 import com.google.android.fhir.datacapture.views.QuestionnaireViewItem
 import com.google.android.fhir.datacapture.views.factories.QuestionnaireItemViewHolderDelegate
 import com.google.android.fhir.datacapture.views.factories.QuestionnaireItemViewHolderFactory
+import com.google.android.fhir.demo.R
 import com.google.android.fhir.demo.external.PPGCaptureUtils
 import com.google.android.material.snackbar.Snackbar
 import org.hl7.fhir.r4.model.DocumentReference
+import org.hl7.fhir.r4.model.QuestionnaireResponse
 import org.hl7.fhir.r4.model.Resource
+import org.w3c.dom.Text
 
 object PPGSensorCaptureFactory :
-  QuestionnaireItemViewHolderFactory(R.layout.attachment_view) {
+  QuestionnaireItemViewHolderFactory(R.layout.sensor_capture_view) {
   override fun getQuestionnaireItemViewHolderDelegate() =
     object : QuestionnaireItemViewHolderDelegate {
       override lateinit var questionnaireViewItem: QuestionnaireViewItem
       private lateinit var capturePpgButton: Button
+      private lateinit var textView: TextView
       // private lateinit var context: AppCompatActivity
 
       override fun init(itemView: View) {
-        capturePpgButton = itemView.findViewById(R.id.take_photo)
+        capturePpgButton = itemView.findViewById(R.id.sensor_capture_ppg)
+        textView = itemView.findViewById(R.id.sensor_capture_status)
         // context = itemView.context.tryUnwrapContext()!!
       }
 
 
       override fun bind(questionnaireViewItem: QuestionnaireViewItem) {
         this.questionnaireViewItem = questionnaireViewItem
-        // val questionnaireItem = questionnaireViewItem.questionnaireItem
-        val x = questionnaireViewItem.answers
-        println(x)
         displayCapturePpgButton(/*questionnaireItem*/)
         capturePpgButton.setOnClickListener { view ->
           onCapturePpgButtonClicked(
@@ -47,7 +48,8 @@ object PPGSensorCaptureFactory :
 
       private fun displayCapturePpgButton(/*questionnaireItem: Questionnaire.QuestionnaireItemComponent*/) {
         capturePpgButton.visibility = View.VISIBLE
-        capturePpgButton.text = "Capture PPG Data"
+        textView.visibility = View.VISIBLE
+        textView.text = "Not captured yet"
       }
 
       private fun onCapturePpgButtonClicked(
@@ -58,6 +60,7 @@ object PPGSensorCaptureFactory :
 
         if (resource is DocumentReference) {
           Snackbar.make(view, "PPG captured", Snackbar.LENGTH_SHORT).show()
+          textView.text = "Capture ID: " + resource.id
         } else {
           Snackbar.make(view, "Could not capture PPG data", Snackbar.LENGTH_SHORT).show()
         }

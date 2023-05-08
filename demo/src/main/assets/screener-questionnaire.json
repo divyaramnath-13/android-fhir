@@ -24,24 +24,14 @@
       "item": [
         {
           "linkId": "ppg-capture-api-call",
+          "type": "display",
+          "text": "test",
           "extension": [
             {
               "url": "http://external-api-call/sensing-backbone",
               "valueCode": "ppg-capture"
             }
-          ],
-          "item": [
-            {
-              "linkId": "workaround",
-              "type": "display",
-              "text": "ppg-display-capture-id"
-            }
           ]
-        },
-        {
-          "linkId": "ppg-display-capture-id",
-          "type": "display",
-          "text": "ppg-display-capture-id"
         },
         {
           "linkId": "photo-capture-api-call",
