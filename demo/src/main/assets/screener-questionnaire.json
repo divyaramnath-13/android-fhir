@@ -2,6 +2,12 @@
   "resourceType": "Questionnaire",
   "id": "sensor-capture-questionnaire",
   "status": "active",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
+      "valueCanonical": "http://example.org/fhir/StructureMap/SensorCapture"
+    }
+  ],
   "item": [
     {
       "linkId": "sensing-capture-group",
@@ -23,8 +29,12 @@
       ],
       "item": [
         {
-          "linkId": "ppg-capture-api-call",
+          "linkId": "ppg-capture-header",
           "type": "display",
+          "text": "Anaemia Study Data Capture"
+        },
+        {
+          "linkId": "ppg-capture-api-call",
           "text": "test",
           "extension": [
             {

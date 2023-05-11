@@ -69,7 +69,7 @@
   <string name="syncing">Syncing</string>
   <string name="sync">Sync</string>
 
-  <string name="capture_ppg_data">Capture PPG Data</string>
+  <string name="capture_ppg">Capture PPG</string>
   <string name="capture_photo">Capture Photo</string>
 
 </resources>

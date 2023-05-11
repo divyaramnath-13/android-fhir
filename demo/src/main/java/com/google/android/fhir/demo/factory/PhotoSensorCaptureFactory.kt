@@ -8,8 +8,12 @@ import com.google.android.fhir.datacapture.views.QuestionnaireViewItem
 import com.google.android.fhir.datacapture.views.factories.QuestionnaireItemViewHolderDelegate
 import com.google.android.fhir.datacapture.views.factories.QuestionnaireItemViewHolderFactory
 import com.google.android.fhir.demo.external.PPGCaptureUtils
+import com.google.android.fhir.demo.external.PhotoCaptureUtils
 import com.google.android.material.snackbar.Snackbar
+import java.util.UUID
+import org.hl7.fhir.r4.model.Coding
 import org.hl7.fhir.r4.model.DocumentReference
+import org.hl7.fhir.r4.model.QuestionnaireResponse
 import org.hl7.fhir.r4.model.Resource
 
 object PhotoSensorCaptureFactory :
@@ -19,6 +23,7 @@ object PhotoSensorCaptureFactory :
       override lateinit var questionnaireViewItem: QuestionnaireViewItem
       private lateinit var capturePhotoButton: Button
       private lateinit var textView: TextView
+      private lateinit var captureId: String
       // private lateinit var context: AppCompatActivity
 
       override fun init(itemView: View) {
@@ -30,7 +35,10 @@ object PhotoSensorCaptureFactory :
 
       override fun bind(questionnaireViewItem: QuestionnaireViewItem) {
         this.questionnaireViewItem = questionnaireViewItem
-        // val questionnaireItem = questionnaireViewItem.questionnaireItem
+        captureId = if (questionnaireViewItem.answers.isEmpty())
+          UUID.randomUUID().toString()
+        else
+          questionnaireViewItem.answers.first().valueCoding.code
         displayTakePhotoButton(/*questionnaireItem*/)
         capturePhotoButton.setOnClickListener { view -> onTakePhotoButtonClicked(view) }
       }
@@ -42,17 +50,22 @@ object PhotoSensorCaptureFactory :
       private fun displayTakePhotoButton(/*questionnaireItem: Questionnaire.QuestionnaireItemComponent*/) {
         capturePhotoButton.visibility = View.VISIBLE
         textView.visibility = View.VISIBLE
-        textView.text = "Not captured yet"
       }
 
       private fun onTakePhotoButtonClicked(view: View/*, questionnaireItem: Questionnaire.QuestionnaireItemComponent*/) {
-        val resource: Resource = PPGCaptureUtils.capturePPG()
+        val status = PhotoCaptureUtils.capturePhoto(captureId)
+        if (status) {
+          Snackbar.make(view, "PPG captured", Snackbar.LENGTH_SHORT).show()
+          val answer = QuestionnaireResponse.QuestionnaireResponseItemAnswerComponent().apply {
+            value = Coding().apply {
+              code = captureId
+              system = "PhotoSensorCaptureFactory"
+            }
+          }
+          questionnaireViewItem.setAnswer(answer)
 
-        if (resource is DocumentReference) {
-          Snackbar.make(view, "Photo captured", Snackbar.LENGTH_SHORT).show()
-          textView.text = "Capture ID: " + resource.id
-        } else {
-          Snackbar.make(view, "Could not capture photo", Snackbar.LENGTH_SHORT).show()
+          val photoFilePath = PhotoCaptureUtils.getPhotoPath(captureId)
+          textView.text = "Photo captured at: " + photoFilePath
         }
       }
     }

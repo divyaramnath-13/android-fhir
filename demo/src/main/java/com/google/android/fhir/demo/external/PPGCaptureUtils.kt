@@ -13,39 +13,23 @@ import org.hl7.fhir.r4.model.Resource
 class PPGCaptureUtils {
 
   companion object {
-    fun capturePPG(): Resource {
+    fun capturePPG(captureId: String): Boolean {
 
-      val resourceId = UUID.randomUUID().toString()
-      val ppgSnomedCode = Coding().apply {
-        system = "http://snomed.info/sct"
-        display = "Photoplethysmography"
-        code = "72075005"
-      }
-
-      val ppgData = Attachment().apply {
-        contentType = "video/mp4"
-        url = getBlobStoreUrl()
-        title = "PPG data collected for 30 seconds"
-        creation = Date()
-      }
-
-      val data: MutableList<DocumentReferenceContentComponent> = mutableListOf(DocumentReferenceContentComponent(ppgData))
-      val documentType = CodeableConcept(ppgSnomedCode)
-
-      val ppgDocumentReference = DocumentReference().apply {
-        id = resourceId
-        status = Enumerations.DocumentReferenceStatus.CURRENT
-        type = documentType
-        date = Date()
-        description = "Reference to PPG data collected for 30 seconds"
-        content = data
-      }
-      return ppgDocumentReference
+      // capture PPG here and return status
+      return true
     }
 
-    private fun getBlobStoreUrl(): String {
-      val uuid = UUID.randomUUID().toString()
-      return "http://localhost:9001/ppg-data/$uuid"
+    fun getPPGDirectory(captureId: String): String {
+      // val filePathList: MutableList<String> = mutableListOf()
+
+      // logic to fetch PPG directory using captureId
+      // filePathList.add("/storage/emulated/0/DCIM/$captureId/SENSOR_PPG/frame_001.jpg")
+      // filePathList.add("/storage/emulated/0/DCIM/$captureId/SENSOR_PPG/frame_002.jpg")
+      // filePathList.add("/storage/emulated/0/DCIM/$captureId/SENSOR_PPG/frame_003.jpg")
+      // filePathList.add("/storage/emulated/0/DCIM/$captureId/SENSOR_PPG/frame_004.jpg")
+      // filePathList.add("/storage/emulated/0/DCIM/$captureId/SENSOR_PPG/frame_005.jpg")
+
+      return "/storage/emulated/0/DCIM/$captureId/SENSOR_PPG/"
     }
 
   }

@@ -25,6 +25,7 @@ import ca.uhn.fhir.context.FhirContext
 import ca.uhn.fhir.context.FhirVersionEnum
 import com.google.android.fhir.FhirEngine
 import com.google.android.fhir.datacapture.mapping.ResourceMapper
+import com.google.android.fhir.datacapture.mapping.StructureMapExtractionContext
 import java.math.BigDecimal
 import java.util.UUID
 import kotlinx.coroutines.launch
@@ -33,6 +34,7 @@ import org.hl7.fhir.r4.model.CodeableConcept
 import org.hl7.fhir.r4.model.Coding
 import org.hl7.fhir.r4.model.Condition
 import org.hl7.fhir.r4.model.DateTimeType
+import org.hl7.fhir.r4.model.DocumentReference
 import org.hl7.fhir.r4.model.Encounter
 import org.hl7.fhir.r4.model.Observation
 import org.hl7.fhir.r4.model.Questionnaire
@@ -41,6 +43,8 @@ import org.hl7.fhir.r4.model.Reference
 import org.hl7.fhir.r4.model.Resource
 import org.hl7.fhir.r4.model.RiskAssessment
 import org.hl7.fhir.r4.model.codesystems.RiskProbability
+import org.hl7.fhir.r4.utils.StructureMapUtilities
+import org.intellij.lang.annotations.Language
 
 /** ViewModel for screener questionnaire screen {@link ScreenerEncounterFragment}. */
 class ScreenerViewModel(application: Application, private val state: SavedStateHandle) :
@@ -48,6 +52,8 @@ class ScreenerViewModel(application: Application, private val state: SavedStateH
   val questionnaire: String
     get() = getQuestionnaireJson()
   val isResourcesSaved = MutableLiveData<Boolean>()
+
+  val context = application.applicationContext
 
   private val questionnaireResource: Questionnaire
     get() =
@@ -63,7 +69,66 @@ class ScreenerViewModel(application: Application, private val state: SavedStateH
    */
   fun saveScreenerEncounter(questionnaireResponse: QuestionnaireResponse, patientId: String) {
     viewModelScope.launch {
-      val bundle = ResourceMapper.extract(questionnaireResource, questionnaireResponse)
+      val mapping =
+        """
+          map "http://example.org/fhir/StructureMap/SensorCapture" = 'SensorCapture'
+          uses "http://hl7.org/fhir/StructureDefinition/QuestionnaireReponse" as source
+          uses "http://hl7.org/fhir/StructureDefinition/Bundle" as target
+
+          group SensorCapture(source src : QuestionnaireResponse, target bundle: Bundle) {
+            src -> bundle.id = uuid() "rule_bundle_id";
+            src -> bundle.type = 'collection' "rule_bundle_type";
+            src -> bundle.entry as entry, entry.resource = create('DocumentReference') as ppgdocref then
+              ExtractPPGDocumentReference(src, ppgdocref) "rule_extract_document_reference";
+            src -> bundle.entry as entry, entry.resource = create('DocumentReference') as photodocref then
+              ExtractPhotoDocumentReference(src, photodocref) "rule_extract_photo_document_reference";
+          }
+
+          group ExtractPPGDocumentReference(source src : QuestionnaireResponse, target tgt : Patient) {
+            src.item as item where(linkId = 'sensing-capture-group') then {
+              item.item as inner_item where (linkId = 'ppg-capture-api-call') then {
+                inner_item.answer first as ans then {
+                  ans.value as coding then {
+                    coding.code as val -> tgt.type = val "rule_ppg_capture_id";
+                  };
+                };
+              };
+          };
+        }
+          
+          group ExtractPhotoDocumentReference(source src : QuestionnaireResponse, target tgt : Patient) {
+            src.item as item where(linkId = 'sensing-capture-group') then {
+              item.item as inner_item where (linkId = 'photo-capture-api-call') then {
+                    inner_item.answer first as ans then {
+                      ans.value as coding then {
+                        coding.code as val -> tgt.type = val "rule_photo_capture_id";
+                      };
+                    };
+                  };
+            };
+          }
+        """.trimIndent()
+
+      val iParser = FhirContext.forCached(FhirVersionEnum.R4).newJsonParser()
+
+      val uriTestQuestionnaire =
+        iParser.parseResource(Questionnaire::class.java, questionnaireJson) as Questionnaire
+
+      val uriTestQuestionnaireResponse =
+        iParser.parseResource(QuestionnaireResponse::class.java, iParser.encodeResourceToString(questionnaireResponse))
+          as QuestionnaireResponse
+
+      val bundle =
+        ResourceMapper.extract(
+          uriTestQuestionnaire,
+          uriTestQuestionnaireResponse,
+          StructureMapExtractionContext(context = context) { _, worker ->
+            StructureMapUtilities(worker).parse(mapping, "")
+          },
+        )
+
+      // println(b.id)
+      // val bundle = ResourceMapper.extract(questionnaireResource, questionnaireResponse)
       val subjectReference = Reference("Patient/$patientId")
       val encounterId = generateUuid()
       if (isRequiredFieldMissing(bundle)) {
@@ -84,6 +149,10 @@ class ScreenerViewModel(application: Application, private val state: SavedStateH
     val encounterReference = Reference("Encounter/$encounterId")
     bundle.entry.forEach {
       when (val resource = it.resource) {
+        is DocumentReference -> {
+          // capture logic
+          println("Capture ID: " + resource.type.coding[0].code)
+        }
         is Observation -> {
           if (resource.hasCode()) {
             resource.id = generateUuid()
