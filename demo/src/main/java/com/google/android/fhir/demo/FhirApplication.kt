@@ -27,8 +27,9 @@ import com.google.android.fhir.datacapture.DataCaptureConfig
 import com.google.android.fhir.datacapture.QuestionnaireFragment
 import com.google.android.fhir.datacapture.XFhirQueryResolver
 import com.google.android.fhir.demo.data.FhirSyncWorker
+import com.google.android.fhir.demo.factory.ConjunctivaPhotoSensorCaptureFactory
 import com.google.android.fhir.demo.factory.PPGSensorCaptureFactory
-import com.google.android.fhir.demo.factory.PhotoSensorCaptureFactory
+import com.google.android.fhir.demo.factory.FingernailsPhotoSensorCaptureFactory
 import com.google.android.fhir.search.search
 import com.google.android.fhir.sync.Sync
 import com.google.android.fhir.sync.remote.HttpLogger
@@ -89,9 +90,14 @@ class FhirApplication : Application(), DataCaptureConfig.Provider {
 
         override fun get(): List<QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatcher> {
           return listOf(
-            QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatcher(PhotoSensorCaptureFactory) { questionnaireItem ->
-              questionnaireItem.getExtensionByUrl(PhotoSensorCaptureFactory.WIDGET_EXTENSION).let {
-                if (it == null) false else it.value.toString() == PhotoSensorCaptureFactory.WIDGET_TYPE
+            QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatcher(FingernailsPhotoSensorCaptureFactory) { questionnaireItem ->
+              questionnaireItem.getExtensionByUrl(FingernailsPhotoSensorCaptureFactory.WIDGET_EXTENSION).let {
+                if (it == null) false else it.value.toString() == FingernailsPhotoSensorCaptureFactory.WIDGET_TYPE
+              }
+            },
+            QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatcher(ConjunctivaPhotoSensorCaptureFactory) { questionnaireItem ->
+              questionnaireItem.getExtensionByUrl(ConjunctivaPhotoSensorCaptureFactory.WIDGET_EXTENSION).let {
+                if (it == null) false else it.value.toString() == ConjunctivaPhotoSensorCaptureFactory.WIDGET_TYPE
               }
             },
             QuestionnaireFragment.QuestionnaireItemViewHolderFactoryMatcher(

@@ -54,7 +54,6 @@
       android:layout_marginEnd="@dimen/attachment_action_button_margin_end"
       android:paddingHorizontal="@dimen/attachment_action_button_padding_horizontal"
       android:visibility="gone"
-      android:text="@string/capture_photo"
       />
 
   <TextView

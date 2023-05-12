@@ -7,16 +7,13 @@ import com.google.android.fhir.demo.R
 import com.google.android.fhir.datacapture.views.QuestionnaireViewItem
 import com.google.android.fhir.datacapture.views.factories.QuestionnaireItemViewHolderDelegate
 import com.google.android.fhir.datacapture.views.factories.QuestionnaireItemViewHolderFactory
-import com.google.android.fhir.demo.external.PPGCaptureUtils
-import com.google.android.fhir.demo.external.PhotoCaptureUtils
+import com.google.android.fhir.demo.external.ConjunctivaPhotoCaptureUtils
 import com.google.android.material.snackbar.Snackbar
 import java.util.UUID
 import org.hl7.fhir.r4.model.Coding
-import org.hl7.fhir.r4.model.DocumentReference
 import org.hl7.fhir.r4.model.QuestionnaireResponse
-import org.hl7.fhir.r4.model.Resource
 
-object PhotoSensorCaptureFactory :
+object ConjunctivaPhotoSensorCaptureFactory :
   QuestionnaireItemViewHolderFactory(R.layout.sensor_capture_view) {
   override fun getQuestionnaireItemViewHolderDelegate() =
     object : QuestionnaireItemViewHolderDelegate {
@@ -28,6 +25,7 @@ object PhotoSensorCaptureFactory :
 
       override fun init(itemView: View) {
         capturePhotoButton = itemView.findViewById(R.id.sensor_capture_photo)
+        capturePhotoButton.setText("Capture Conjunctiva Photo")
         textView = itemView.findViewById(R.id.photo_capture_status)
         // context = itemView.context.tryUnwrapContext()!!
       }
@@ -53,22 +51,22 @@ object PhotoSensorCaptureFactory :
       }
 
       private fun onTakePhotoButtonClicked(view: View/*, questionnaireItem: Questionnaire.QuestionnaireItemComponent*/) {
-        val status = PhotoCaptureUtils.capturePhoto(captureId)
+        val status = ConjunctivaPhotoCaptureUtils.capturePhoto(captureId)
         if (status) {
-          Snackbar.make(view, "PPG captured", Snackbar.LENGTH_SHORT).show()
+          Snackbar.make(view, "Photo captured", Snackbar.LENGTH_SHORT).show()
           val answer = QuestionnaireResponse.QuestionnaireResponseItemAnswerComponent().apply {
             value = Coding().apply {
               code = captureId
-              system = "PhotoSensorCaptureFactory"
+              system = "ConjunctivaPhotoSensorCaptureFactory"
             }
           }
           questionnaireViewItem.setAnswer(answer)
 
-          val photoFilePath = PhotoCaptureUtils.getPhotoPath(captureId)
+          val photoFilePath = ConjunctivaPhotoCaptureUtils.getPhotoPath(captureId)
           textView.text = "Photo captured at: " + photoFilePath
         }
       }
     }
   const val WIDGET_EXTENSION = "http://external-api-call/sensing-backbone"
-  const val WIDGET_TYPE = "photo-capture"
+  const val WIDGET_TYPE = "photo-conjunctiva-capture"
 }

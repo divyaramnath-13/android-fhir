@@ -1,6 +1,6 @@
 package com.google.android.fhir.demo.external
 
-class PhotoCaptureUtils {
+class FingernailsPhotoCaptureUtils {
 
   companion object {
     fun capturePhoto(captureId: String): Boolean {

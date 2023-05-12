@@ -83,8 +83,10 @@ class ScreenerViewModel(application: Application, private val state: SavedStateH
             src -> bundle.type = 'collection' "rule_bundle_type";
             src -> bundle.entry as entry, entry.resource = create('DocumentReference') as ppgdocref then
               ExtractPPGDocumentReference(src, ppgdocref) "rule_extract_document_reference";
-            src -> bundle.entry as entry, entry.resource = create('DocumentReference') as photodocref then
-              ExtractPhotoDocumentReference(src, photodocref) "rule_extract_photo_document_reference";
+            src -> bundle.entry as entry, entry.resource = create('DocumentReference') as photofingernailsdocref then
+              ExtractFingernailsPhotoDocumentReference(src, photofingernailsdocref) "rule_extract_photo_fingernails_document_reference";
+            src -> bundle.entry as entry, entry.resource = create('DocumentReference') as photoconjunctivadocref then
+              ExtractConjunctivaPhotoDocumentReference(src, photoconjunctivadocref) "rule_extract_photo_conjunctiva_document_reference";
           }
 
           group ExtractPPGDocumentReference(source src : QuestionnaireResponse, target tgt : Patient) {
@@ -99,9 +101,21 @@ class ScreenerViewModel(application: Application, private val state: SavedStateH
           };
         }
           
-          group ExtractPhotoDocumentReference(source src : QuestionnaireResponse, target tgt : Patient) {
+          group ExtractFingernailsPhotoDocumentReference(source src : QuestionnaireResponse, target tgt : Patient) {
             src.item as item where(linkId = 'sensing-capture-group') then {
-              item.item as inner_item where (linkId = 'photo-capture-api-call') then {
+              item.item as inner_item where (linkId = 'photo-capture-fingernails-api-call') then {
+                    inner_item.answer first as ans then {
+                      ans.value as coding then {
+                        coding.code as val -> tgt.type = val "rule_photo_capture_id";
+                      };
+                    };
+                  };
+            };
+          }
+          
+          group ExtractConjunctivaPhotoDocumentReference(source src : QuestionnaireResponse, target tgt : Patient) {
+            src.item as item where(linkId = 'sensing-capture-group') then {
+              item.item as inner_item where (linkId = 'photo-capture-conjunctiva-api-call') then {
                     inner_item.answer first as ans then {
                       ans.value as coding then {
                         coding.code as val -> tgt.type = val "rule_photo_capture_id";
