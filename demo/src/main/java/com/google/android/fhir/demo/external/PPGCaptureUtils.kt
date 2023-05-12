@@ -1,7 +1,10 @@
 package com.google.android.fhir.demo.external
 
+import java.io.FileInputStream
+import java.io.InputStream
 import java.util.Date
 import java.util.UUID
+import java.util.zip.ZipInputStream
 import org.hl7.fhir.r4.model.Attachment
 import org.hl7.fhir.r4.model.CodeableConcept
 import org.hl7.fhir.r4.model.Coding

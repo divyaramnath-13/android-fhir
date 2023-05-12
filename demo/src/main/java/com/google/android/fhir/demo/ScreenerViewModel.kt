@@ -27,8 +27,10 @@ import com.google.android.fhir.FhirEngine
 import com.google.android.fhir.datacapture.mapping.ResourceMapper
 import com.google.android.fhir.datacapture.mapping.StructureMapExtractionContext
 import java.math.BigDecimal
+import java.util.Date
 import java.util.UUID
 import kotlinx.coroutines.launch
+import org.hl7.fhir.r4.model.Attachment
 import org.hl7.fhir.r4.model.Bundle
 import org.hl7.fhir.r4.model.CodeableConcept
 import org.hl7.fhir.r4.model.Coding
@@ -36,6 +38,7 @@ import org.hl7.fhir.r4.model.Condition
 import org.hl7.fhir.r4.model.DateTimeType
 import org.hl7.fhir.r4.model.DocumentReference
 import org.hl7.fhir.r4.model.Encounter
+import org.hl7.fhir.r4.model.Enumerations
 import org.hl7.fhir.r4.model.Observation
 import org.hl7.fhir.r4.model.Questionnaire
 import org.hl7.fhir.r4.model.QuestionnaireResponse
@@ -127,8 +130,6 @@ class ScreenerViewModel(application: Application, private val state: SavedStateH
           },
         )
 
-      // println(b.id)
-      // val bundle = ResourceMapper.extract(questionnaireResource, questionnaireResponse)
       val subjectReference = Reference("Patient/$patientId")
       val encounterId = generateUuid()
       if (isRequiredFieldMissing(bundle)) {
@@ -150,8 +151,26 @@ class ScreenerViewModel(application: Application, private val state: SavedStateH
     bundle.entry.forEach {
       when (val resource = it.resource) {
         is DocumentReference -> {
-          // capture logic
-          println("Capture ID: " + resource.type.coding[0].code)
+          val captureId = resource.type.coding[0].code
+          resource.id = generateUuid()
+          resource.status = Enumerations.DocumentReferenceStatus.CURRENT
+          resource.subject = subjectReference
+          resource.date = Date()
+
+          // modify data based on the nature of the capture (obtained from captureId)
+          val data = Attachment().apply {
+            contentType = "application/gzip" // this is for PPG
+            url = "http://localhost:9001/bucket/$captureId/SENSOR_TYPE/attachment.zip" // getBlobStoreUrl()
+            title = "PPG data collected for 30 seconds" // this is for PPG
+            creation = Date()
+          }
+
+          val dataList: MutableList<DocumentReference.DocumentReferenceContentComponent> =
+            mutableListOf(
+              DocumentReference.DocumentReferenceContentComponent(data)
+            )
+          resource.content = dataList
+          resource.description = ""
         }
         is Observation -> {
           if (resource.hasCode()) {
