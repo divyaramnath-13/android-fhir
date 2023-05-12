@@ -1,18 +1,5 @@
 package com.google.android.fhir.demo.external
 
-import java.io.FileInputStream
-import java.io.InputStream
-import java.util.Date
-import java.util.UUID
-import java.util.zip.ZipInputStream
-import org.hl7.fhir.r4.model.Attachment
-import org.hl7.fhir.r4.model.CodeableConcept
-import org.hl7.fhir.r4.model.Coding
-import org.hl7.fhir.r4.model.DocumentReference
-import org.hl7.fhir.r4.model.DocumentReference.DocumentReferenceContentComponent
-import org.hl7.fhir.r4.model.Enumerations
-import org.hl7.fhir.r4.model.Resource
-
 class PPGCaptureUtils {
 
   companion object {
