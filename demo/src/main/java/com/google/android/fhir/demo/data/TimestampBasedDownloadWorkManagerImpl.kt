@@ -19,6 +19,7 @@ package com.google.android.fhir.demo.data
 import com.google.android.fhir.demo.DemoDataStore
 import com.google.android.fhir.demo.care.ConfigurationManager.getCareConfigurationResources
 import com.google.android.fhir.sync.DownloadWorkManager
+import com.google.android.fhir.sync.Request
 import com.google.android.fhir.sync.SyncDataParams
 import com.google.android.fhir.workflow.CarePlanManager
 import java.time.ZoneId
@@ -54,7 +55,8 @@ class TimestampBasedDownloadWorkManagerImpl(
       )
     )
 
-  override suspend fun getNextRequestUrl(): String? {
+
+  override suspend fun getNextRequest(): Request? {
     var url = urls.poll() ?: return null
 
     val resourceTypeToDownload =
@@ -62,7 +64,7 @@ class TimestampBasedDownloadWorkManagerImpl(
     dataStore.getLasUpdateTimestamp(resourceTypeToDownload)?.let {
       url = affixLastUpdatedTimestamp(url, it)
     }
-    return url
+    return Request.of(url)
   }
 
   override suspend fun getSummaryRequestUrls(): Map<ResourceType, String> {
@@ -109,7 +111,6 @@ class TimestampBasedDownloadWorkManagerImpl(
         response.entry
           .map { it.resource }
           .also { extractAndSaveLastUpdateTimestampToFetchFutureUpdates(it) }
-
       for (item in response.entry) {
         if (item.resource is PlanDefinition) {
           bundleCollection +=

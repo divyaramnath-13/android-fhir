@@ -24,6 +24,7 @@ import com.google.android.fhir.DatabaseErrorStrategy.RECREATE_AT_OPEN
 import com.google.android.fhir.FhirEngine
 import com.google.android.fhir.FhirEngineConfiguration
 import com.google.android.fhir.FhirEngineProvider
+import com.google.android.fhir.NetworkConfiguration
 import com.google.android.fhir.ServerConfiguration
 import com.google.android.fhir.datacapture.DataCaptureConfig
 import com.google.android.fhir.demo.care.ConfigurationManager.getTaskConfigMap
@@ -34,6 +35,9 @@ import com.google.android.fhir.sync.remote.HttpLogger
 import com.google.android.fhir.workflow.CarePlanManager
 import com.google.android.fhir.workflow.FhirOperator
 import com.google.android.fhir.workflow.TaskManager
+import com.google.android.fhir.datacapture.XFhirQueryResolver
+import com.google.android.fhir.search.search
+import org.hl7.fhir.r4.model.Patient
 import timber.log.Timber
 
 class FhirApplication : Application(), DataCaptureConfig.Provider {
@@ -52,6 +56,7 @@ class FhirApplication : Application(), DataCaptureConfig.Provider {
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
     }
+    Patient.IDENTIFIER
     FhirEngineProvider.init(
       FhirEngineConfiguration(
         enableEncryptionIfSupported = false,
@@ -63,7 +68,8 @@ class FhirApplication : Application(), DataCaptureConfig.Provider {
               HttpLogger.Configuration(
                 if (BuildConfig.DEBUG) HttpLogger.Level.BODY else HttpLogger.Level.BASIC
               )
-            ) { Timber.tag("App-HttpLog").d(it) }
+            ) { Timber.tag("App-HttpLog").d(it) },
+          networkConfiguration = NetworkConfiguration(uploadWithGzip = false)
         )
       )
     )
@@ -73,6 +79,7 @@ class FhirApplication : Application(), DataCaptureConfig.Provider {
       DataCaptureConfig().apply {
         urlResolver = ReferenceUrlResolver(this@FhirApplication as Context)
         valueSetResolverExternal = object : ValueSetResolver() {}
+        xFhirQueryResolver = XFhirQueryResolver { fhirEngine.search(it) }
       }
     ValueSetResolver.init(this@FhirApplication)
   }

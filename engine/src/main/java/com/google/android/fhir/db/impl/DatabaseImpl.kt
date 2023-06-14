@@ -92,6 +92,8 @@ internal class DatabaseImpl(
               ) { DatabaseEncryptionKeyProvider.getOrCreatePassphrase(DATABASE_PASSPHRASE_NAME) }
             }
           }
+
+          addMigrations(MIGRATION_1_2, MIGRATION_2_3)
         }
         .build()
   }
