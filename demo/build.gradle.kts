@@ -88,7 +88,8 @@ dependencies {
     exclude(group = Dependencies.androidFhirGroup, module = Dependencies.androidFhirEngineModule)
   }
   implementation(project(":engine"))
-  implementation(project(":workflow"))
+  // implementation(project(":workflow"))
+  implementation("com.google.android.fhir:workflow:0.1.0-alpha02-cc")
 
   testImplementation(Dependencies.junit)
 }
