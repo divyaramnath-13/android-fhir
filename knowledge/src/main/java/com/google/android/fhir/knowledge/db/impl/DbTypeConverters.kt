@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-<<<<<<<< HEAD:knowledge/src/main/java/com/google/android/fhir/knowledge/db/impl/DbTypeConverters.kt
 package com.google.android.fhir.knowledge.db.impl
 
 import androidx.room.TypeConverter
@@ -25,21 +24,4 @@ internal object DbTypeConverters {
   @JvmStatic @TypeConverter fun filePathToFile(filePath: String) = File(filePath)
 
   @JvmStatic @TypeConverter fun fileToFilePath(file: File): String = file.path
-========
-package com.google.android.fhir.workflow
-
-import org.hl7.fhir.r4.model.CarePlan
-
-interface RequestResourceManager<T> {
-
-  suspend fun createRequestResource(resource: T): T
-
-  suspend fun updateRequestResourceStatus(resource: T, status: String)
-
-  fun mapRequestResourceStatusToCarePlanStatus(resource: T): CarePlan.CarePlanActivityStatus
-
-  suspend fun linkCarePlanToRequestResource(resource: T, carePlan: CarePlan)
-
-  suspend fun assignOwner(resource: T, ownerId: String)
->>>>>>>> 999dcfaf (Configurable care - workflow APIs (#1962)):workflow/src/main/java/com/google/android/fhir/workflow/RequestResourceManager.kt
 }
