@@ -16,14 +16,20 @@
 
 package com.google.android.fhir.workflow
 
+import android.content.Context
+import ca.uhn.fhir.context.FhirContext
+import ca.uhn.fhir.context.FhirVersionEnum
 import com.google.android.fhir.FhirEngine
+import com.google.android.fhir.knowledge.KnowledgeManager
 import com.google.android.fhir.search.search
+import java.io.File
 import org.hl7.fhir.r4.model.Bundle
 import org.hl7.fhir.r4.model.CanonicalType
 import org.hl7.fhir.r4.model.CarePlan
 import org.hl7.fhir.r4.model.CarePlan.CarePlanActivityStatus
 import org.hl7.fhir.r4.model.IdType
 import org.hl7.fhir.r4.model.Library
+import org.hl7.fhir.r4.model.MetadataResource
 import org.hl7.fhir.r4.model.Patient
 import org.hl7.fhir.r4.model.PlanDefinition
 import org.hl7.fhir.r4.model.Reference
@@ -33,13 +39,27 @@ import org.hl7.fhir.r4.model.Task
 
 class CarePlanManager(
   private var fhirEngine: FhirEngine,
+  private var knowledgeManager: KnowledgeManager,
   private var fhirOperator: FhirOperator,
-  private val taskManager: TaskManager
+  private val taskManager: TaskManager,
+  private val context: Context
 ) {
   private var planDefinitionIdList = ArrayList<String>()
   private var cqlLibraryIdList = ArrayList<String>()
+  private val jsonParser = FhirContext.forCached(FhirVersionEnum.R4).newJsonParser()
 
-  fun getPlanDefinitionDependentResources(planDefinition: PlanDefinition): Collection<Resource> {
+  private fun writeToFile(resource: Resource): File {
+    val fileName =
+      if (resource is MetadataResource && resource.name != null) {
+        resource.name
+      } else {
+        resource.idElement.idPart
+      }
+    return File(context.filesDir, fileName).apply {
+      writeText(jsonParser.encodeResourceToString(resource))
+    }
+  }
+  suspend fun getPlanDefinitionDependentResources(planDefinition: PlanDefinition): Collection<Resource> {
     var bundleCollection: Collection<Resource> = mutableListOf()
 
     addPlanDefinition(IdType(planDefinition.id).idPart)
@@ -50,8 +70,9 @@ class CarePlanManager(
           entry.resource.meta.lastUpdated = planDefinition.meta.lastUpdated
           if (entry.resource is Library) {
             cqlLibraryIdList.add(IdType(entry.resource.id).idPart)
-            fhirOperator.loadLib(entry.resource as Library)
+            knowledgeManager.install(writeToFile(entry.resource))
           }
+          knowledgeManager.install(writeToFile(entry.resource))
 
           bundleCollection += entry.resource
         }
@@ -63,9 +84,13 @@ class CarePlanManager(
   private suspend fun loadCarePlanResourcesFromDb() {
     // Load Library resources
     val availableCqlLibraries = fhirEngine.search<Library> {}
+    val availablePlanDefinitions = fhirEngine.search<PlanDefinition> {}
     for (cqlLibrary in availableCqlLibraries) {
-      fhirOperator.loadLib(cqlLibrary)
+      knowledgeManager.install(writeToFile(cqlLibrary))
       cqlLibraryIdList.add(IdType(cqlLibrary.id).idPart)
+    }
+    for (planDefinition in availablePlanDefinitions) {
+      getPlanDefinitionDependentResources(planDefinition)
     }
   }
 
