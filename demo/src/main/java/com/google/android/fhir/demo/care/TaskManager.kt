@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.android.fhir.workflow
+package com.google.android.fhir.demo.care
 
 import com.google.android.fhir.FhirEngine
 import com.google.android.fhir.search.Operation

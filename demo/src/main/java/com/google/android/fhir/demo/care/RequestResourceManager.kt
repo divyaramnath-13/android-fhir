@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.android.fhir.workflow
+package com.google.android.fhir.demo.care
 
 import org.hl7.fhir.r4.model.CarePlan
 
