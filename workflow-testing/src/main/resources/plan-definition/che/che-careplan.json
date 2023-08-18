@@ -1,0 +1,35 @@
+{
+  "instantiatesCanonical":  "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/PlanDefinition/emcaredt01",
+  "status":"draft",
+  "intent": "proposal",
+  "subject": {
+    "reference":"Test-patient"
+  },
+  "encounter": {
+    "reference": "Test-encounter"
+  },
+  "activity": [
+    {
+      "reference": {
+        "reference": "#emcaredt01"
+      }
+    }
+  ],
+  "contained": [
+    {
+      "instantiatesCanonical":"https://fhir.dk.swisstph-mis.ch/matchbox/fhir/PlanDefinition/emcaredt01",
+      "status":"draft",
+      "intent":"proposal",
+      "subject": {
+        "reference": "Test-patient"
+      },
+      "encounter": {
+        "reference":"Test-encounter"
+      },
+      "focus": {
+        "reference" : "Questionnaire/emcareb.registration.e"
+      },
+      "id":  "emcaredt01"
+    }
+  ]
+}

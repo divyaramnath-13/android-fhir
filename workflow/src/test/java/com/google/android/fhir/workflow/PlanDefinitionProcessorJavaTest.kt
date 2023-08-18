@@ -48,7 +48,34 @@ class PlanDefinitionProcessorJavaTest {
       .apply()
       .isEqualsTo("/plan-definition/hello-world/hello-world-careplan.json")
 
-  @Test
+
+
+@Test
+fun testCHE() =
+    PlanDefinition.Assert.that(
+        "emcaredt01",
+        "Test-patient",
+        "Test-encounter"
+    )
+        .withData("/plan-definition/che/che-patient-data.json")
+        .withLibrary("/plan-definition/che/che-patient-view-bundle.json")
+        .apply()
+        .isEqualsTo("/plan-definition/che/che-careplan.json")
+
+
+
+@Test
+fun testGoogle() =
+    PlanDefinition.Assert.that(
+        "emcaredt01",
+        "Test-patient",
+        "Test-encounter"
+    )
+        .withData("/plan-definition/che/che-patient-data.json")
+        .withLibrary("/plan-definition/che/gg-patient-view-bundle.json")
+        .apply()
+        .isEqualsTo("/plan-definition/che/che-careplan.json")
+    @Test
   @Ignore("https://github.com/google/android-fhir/issues/1890")
   fun testOpioidRec10PatientView() =
     PlanDefinition.Assert.that(

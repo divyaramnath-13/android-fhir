@@ -1,0 +1,1356 @@
+{
+    "resourceType": "Questionnaire",
+    "id": "emcare.b10-16.signs.2m.p",
+    "meta": {
+        "profile": [
+            "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire"
+        ]
+    },
+    "extension": [
+        {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-knowledgeCapability",
+            "valueCode": "shareable"
+        },
+        {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-knowledgeCapability",
+            "valueCode": "computable"
+        },
+        {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-knowledgeCapability",
+            "valueCode": "publishable"
+        },
+        {
+            "url": "http://hl7.org/fhir/uv/cpg/StructureDefinition/cpg-knowledgeRepresentationLevel",
+            "valueCode": "structured"
+        },
+        {
+            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-targetStructureMap",
+            "valueCanonical": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/StructureMap/emcare.b10-16.signs.2m.p"
+        },
+        {
+            "url": "http://hl7.org/fhir/StructureDefinition/cqf-library",
+            "valueCanonical": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/Library/emcareb1016signs2mp"
+        }
+    ],
+    "url": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/Questionnaire/emcare.b10-16.signs.2m.p",
+    "name": "EmCare.B10-16.Signs.2m.p",
+    "title": "EmCare.B10-16.Signs.2m.p",
+    "status": "active",
+    "experimental": false,
+    "subjectType": [
+        "Patient"
+    ],
+    "item": [
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "danger signs"
+                    }
+                }
+            ],
+            "linkId": "Danger Signs",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "ageinmonths"
+                    }
+                }
+            ],
+            "linkId": "AgeInMonths",
+            "text": "Age",
+            "type": "integer",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "cough"
+                    }
+                }
+            ],
+            "linkId": "Cough",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "difficulty breathing"
+                    }
+                }
+            ],
+            "linkId": "Difficulty Breathing",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "oral fluid test failed"
+                    }
+                }
+            ],
+            "linkId": "Oral Fluid Test failed",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "diarrhoea"
+                    }
+                }
+            ],
+            "linkId": "Diarrhoea",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "not able to drink or breastfeed"
+                    }
+                }
+            ],
+            "linkId": "Not able to drink or breastfeed",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "unconscious or lethargic"
+                    }
+                }
+            ],
+            "linkId": "Unconscious or Lethargic",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "fever"
+                    }
+                }
+            ],
+            "linkId": "Fever",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "refusal to use a limb"
+                    }
+                }
+            ],
+            "linkId": "Refusal to Use a Limb",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "ear problem"
+                    }
+                }
+            ],
+            "linkId": "Ear Problem",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "eye problem"
+                    }
+                }
+            ],
+            "linkId": "Eye Problem",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "skin problem"
+                    }
+                }
+            ],
+            "linkId": "Skin Problem",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "ear discharge"
+                    }
+                }
+            ],
+            "linkId": "Ear discharge",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "ear discharge for how long?"
+                    }
+                }
+            ],
+            "linkId": "Ear discharge for how long?",
+            "type": "choice",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+                    "valueExpression": {
+                        "language": "text/cql-identifier",
+                        "expression": "itchy skin"
+                    }
+                }
+            ],
+            "linkId": "Itchy Skin",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-subQuestionnaire",
+                    "valueCanonical": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/Questionnaire/emcare.b22.respiratoryrate"
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Cough').answer.first().value = true or %resource.repeat(item).where(linkId='Difficulty Breathing').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B22.RespiratoryRate",
+            "type": "group",
+            "required": true,
+            "repeats": false,
+            "item": [
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
+                            "valueCoding": {
+                                "system": "http://unitsofmeasure.org",
+                                "code": "{Counts}/min"
+                            }
+                        },
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='AgeInMonths').answer.first().value > 2"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B22.DE01",
+                    "text": "Respiratory Rate",
+                    "type": "quantity",
+                    "required": true,
+                    "repeats": false
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+                            "valueCodeableConcept": {
+                                "coding": [
+                                    {
+                                        "system": "http://hl7.org/fhir/questionnaire-item-control",
+                                        "code": "check-box",
+                                        "display": "Check-box"
+                                    }
+                                ],
+                                "text": "Check-box"
+                            }
+                        },
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='AgeInMonths').answer.first().value > 2  and %resource.repeat(item).where(linkId='EmCare.B22.RespiratoryRate').repeat(item).where(linkId='EmCare.B22.DE01').answer.first().empty()"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B22.DE02",
+                    "type": "choice",
+                    "required": false,
+                    "repeats": true,
+                    "answerOption": [
+                        {
+                            "valueCoding": {
+                                "code": "EmCare.B22.DE02",
+                                "display": "Unable to perform Respiratory Rate at this time"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='AgeInMonths').answer.first().value < 2"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B22.DE03",
+                    "text": "Respiratory Rate First Count",
+                    "type": "quantity",
+                    "required": true,
+                    "repeats": false
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
+                            "valueCoding": {
+                                "system": "http://unitsofmeasure.org",
+                                "code": "{Counts}/min"
+                            }
+                        },
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='AgeInMonths').answer.first().value < 2 and %resource.repeat(item).where(linkId='EmCare.B22.RespiratoryRate').repeat(item).where(linkId='EmCare.B22.DE03').answer.first().value > 60 '{Counts}/min' and %resource.repeat(item).where(linkId='EmCare.B22.RespiratoryRate').repeat(item).where(linkId='EmCare.B22.DE05').answer.first().empty()"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B22.DE04",
+                    "text": "Respiratory Rate Second Count",
+                    "type": "quantity",
+                    "required": false,
+                    "repeats": false
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+                            "valueCodeableConcept": {
+                                "coding": [
+                                    {
+                                        "system": "http://hl7.org/fhir/questionnaire-item-control",
+                                        "code": "check-box",
+                                        "display": "Check-box"
+                                    }
+                                ],
+                                "text": "Check-box"
+                            }
+                        },
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='AgeInMonths').answer.first().value < 2 and %resource.repeat(item).where(linkId='EmCare.B22.RespiratoryRate').repeat(item).where(linkId='EmCare.B22.DE04').answer.first().empty()"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B22.DE05",
+                    "type": "choice",
+                    "required": false,
+                    "repeats": true,
+                    "answerOption": [
+                        {
+                            "valueCoding": {
+                                "code": "EmCare.B22.DE05",
+                                "display": "Respiratory Rate Second Count Not Possible"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='AgeInMonths').answer.first().value < 2"
+                            }
+                        },
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "iif((%resource.repeat(item).where(linkId='AgeInMonths').answer.first().value<2 and %resource.repeat(item).where(linkId='EmCare.B22.RespiratoryRate').repeat(item).where(linkId='EmCare.B22.DE04').answer.first().value >= 60 '{Counts}/min'or%resource.repeat(item).where(linkId='EmCare.B22.RespiratoryRate').repeat(item).where(linkId='EmCare.B22.DE01').answer.first().value >= 50 '{Counts}/min' and %resource.repeat(item).where(linkId='AgeInMonths').answer.first().value < 12or %resource.repeat(item).where(linkId='EmCare.B22.RespiratoryRate').repeat(item).where(linkId='EmCare.B22.DE01').answer.first().value >= 40 '{Counts}/min' and %resource.repeat(item).where(linkId='AgeInMonths').answer.first().value>=12 and %resource.repeat(item).where(linkId='AgeInMonths').answer.first().value < 60), true, false)"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B22.DE07",
+                    "text": "Fast Breathing",
+                    "type": "boolean",
+                    "required": false,
+                    "repeats": false,
+                    "readOnly": true
+                }
+            ]
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Cough').answer.first().value = true or %resource.repeat(item).where(linkId='Difficulty Breathing').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B10S2.DE03",
+            "text": "Chest Indrawing",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Cough').answer.first().value = true or %resource.repeat(item).where(linkId='Difficulty Breathing').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B10S2.DE04",
+            "text": "Stridor in a calm child",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Cough').answer.first().value = true or %resource.repeat(item).where(linkId='Difficulty Breathing').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B10S2.DE05",
+            "text": "Wheezing",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B10S2.DE05').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B10S2.DE06",
+            "text": "Recurrent Wheeze",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Cough').answer.first().value = true or %resource.repeat(item).where(linkId='Difficulty Breathing').answer.first().value = true  or %resource.repeat(item).where(linkId='EmCare.B10S2.DE04').answer.first().value = false"
+                    }
+                }
+            ],
+            "linkId": "Oxygen_Saturation",
+            "type": "group",
+            "required": false,
+            "repeats": false,
+            "item": [
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-unit",
+                            "valueCoding": {
+                                "system": "http://unitsofmeasure.org",
+                                "code": "%"
+                            }
+                        },
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='Oxygen_Saturation').repeat(item).where(linkId='EmCare.B10S2.DE09').answer.first().empty()"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B10S2.DE07",
+                    "text": "Oxygen Saturation",
+                    "type": "quantity",
+                    "required": false,
+                    "repeats": false
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='Oxygen_Saturation').repeat(item).where(linkId='EmCare.B10S2.DE07').answer.first().exists() and %resource.repeat(item).where(linkId='Oxygen_Saturation').repeat(item).where(linkId='EmCare.B10S2.DE07').answer.first().value< 90 '%'"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B10S2.DE08",
+                    "text": "Oxygen Saturation < 90 %",
+                    "type": "display",
+                    "required": false,
+                    "repeats": false,
+                    "readOnly": true
+                },
+                {
+                    "extension": [
+                        {
+                            "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+                            "valueCodeableConcept": {
+                                "coding": [
+                                    {
+                                        "system": "http://hl7.org/fhir/questionnaire-item-control",
+                                        "code": "check-box",
+                                        "display": "Check-box"
+                                    }
+                                ],
+                                "text": "Check-box"
+                            }
+                        },
+                        {
+                            "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='Oxygen_Saturation').repeat(item).where(linkId='EmCare.B10S2.DE07').answer.first().empty()"
+                            }
+                        }
+                    ],
+                    "linkId": "EmCare.B10S2.DE09",
+                    "type": "choice",
+                    "required": false,
+                    "repeats": true,
+                    "answerOption": [
+                        {
+                            "valueCoding": {
+                                "code": "EmCare.B10S2.DE09",
+                                "display": "Oxygen saturation not measured"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Diarrhoea').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B11S2.DE01",
+            "text": "Sunken eyes",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Diarrhoea').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B11S2.DE02",
+            "text": "Skin pinch of Abdomen",
+            "type": "choice",
+            "required": true,
+            "repeats": false,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/skin-pinch-abdomen"
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Diarrhoea').answer.first().value = true and  iif(%resource.repeat(item).where(linkId='Unconscious or Lethargic').answer.first().value = true,false,true)"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B11S2.DE06",
+            "text": "Restless and Irritable",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "linkId": "EmCare.B17S1.DE01",
+            "text": "Throat problem",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B17S1.DE01').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B17S1.DE02",
+            "text": "Specify Throat problem",
+            "type": "choice",
+            "required": true,
+            "repeats": false,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/throatproblem"
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B17S1.DE01').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B17S1.DE06",
+            "text": "Enlarged lymph nodes on front of neck",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B17S1.DE01').answer.first().value = true and %resource.repeat(item).where(linkId='Not able to drink or breastfeed').answer.first().value = false  or %resource.repeat(item).where(linkId='Not able to drink or breastfeed').answer.first().value = true and %resource.repeat(item).where(linkId='Oral Fluid Test failed').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B17S1.DE07",
+            "text": "Ability to swallow",
+            "type": "choice",
+            "required": true,
+            "repeats": false,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/abilitytoswallow"
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Ear Problem').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B13S2.DE01",
+            "text": "Tender swelling behind the ear",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Ear Problem').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B13S2.DE02",
+            "text": "Pus Seen Draining from the Ear",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Ear discharge').answer.first().value = false   and %resource.repeat(item).where(linkId='EmCare.B13S2.DE02').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B13S2.DE03",
+            "text": "Pus Seen Draining from the Ear for how long?",
+            "type": "choice",
+            "required": true,
+            "repeats": false,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/more-than-14d"
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Fever').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B12S2.DE01",
+            "text": "Stiff neck",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Fever').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B12S2.DE05",
+            "text": "Runny nose",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Fever').answer.first().value = true and %resource.repeat(item).where(linkId='Eye Problem').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE01",
+            "text": "Red eyes",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Eye Problem').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE02",
+            "text": "Pus Draining from Eye",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Eye Problem').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE03",
+            "text": "Clouding of the Cornea",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE03').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE04",
+            "text": "Is Clouding of the Cornea a new problem",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE03').answer.first().value = true or %resource.repeat(item).where(linkId='EmCare.B14S2.DE04').answer.first().value = false"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE05",
+            "text": "Has Clouding of the Cornea previously been treated",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+                    "valueCodeableConcept": {
+                        "coding": [
+                            {
+                                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                                "code": "check-box",
+                                "display": "Check-box"
+                            }
+                        ],
+                        "text": "Check-box"
+                    }
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Skin Problem').answer.first().value = true or (%resource.repeat(item).where(linkId='Fever').answer.first().value = true and (%resource.repeat(item).where(linkId='Cough').answer.first().value = true or %resource.repeat(item).where(linkId='EmCare.B12S2.DE05').answer.first().value = true or %resource.repeat(item).where(linkId='EmCare.B14S2.DE01').answer.first().value = true))"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE06",
+            "text": "Generalised or Localised Skin Problem",
+            "type": "choice",
+            "required": true,
+            "repeats": true,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/skin-pb-location"
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Fever').answer.first().value = true or ( %resource.repeat(item).where(linkId='Cough').answer.first().value = true or %resource.repeat(item).where(linkId='EmCare.B12S2.DE05').answer.first().value = true or %resource.repeat(item).where(linkId='EmCare.B14S2.DE01').answer.first().value = true ) and %resource.repeat(item).where(linkId='EmCare.B14S2.DE06').answer.where(value.code =  'EmCare.B14S2.DE07').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE10",
+            "text": "Measles Rash",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Fever').answer.first().value = true and (iif(%resource.repeat(item).where(linkId='EmCare.B14S2.DE01').answer.first().value = true, false, true) or iif(%resource.repeat(item).where(linkId='Cough').answer.first().value = true, false, true) or iif(%resource.repeat(item).where(linkId='EmCare.B12S2.DE05').answer.first().value = true, false, true)) or %resource.repeat(item).where(linkId='EmCare.B14S2.DE06').answer.where(value.code =  'EmCare.B14S2.DE07').empty() or %resource.repeat(item).where(linkId='EmCare.B14S2.DE10').answer.first().value = false"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE11",
+            "text": "Measles within the last 3 months",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Danger Signs').answer.first().value = false or %resource.repeat(item).where(linkId='Skin Problem').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE12",
+            "text": "Blisters, Sores or Pustules",
+            "type": "boolean",
+            "required": true,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "extension": [
+                        {
+                            "url": "option",
+                            "valueCoding": {
+                                "system": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/CodeSystem/emcare-custom-codes",
+                                "code": "EmCare.B14S2.DE22"
+                            }
+                        },
+                        {
+                            "url": "expression",
+                            "valueExpression": {
+                                "language": "text/fhirpath",
+                                "expression": "%resource.repeat(item).where(linkId='Danger Signs').answer.first().value = false and %resource.repeat(item).where(linkId='Itchy Skin').answer.first().value=true and %resource.repeat(item).where(linkId='EmCare.B14S2.DE12').answer.first().value = true and  %resource.repeat(item).where(linkId='EmCare.B14S2.DE06').answer.first().value !<< \"Generalised Skin Problem\""
+                            }
+                        }
+                    ],
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-answerOptionsToggleExpression"
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Danger Signs').answer.first().value = false and  ( %resource.repeat(item).where(linkId='EmCare.B14S2.DE06').answer.where(value.code =  'EmCare.B14S2.DE07').exists() or %resource.repeat(item).where(linkId='EmCare.B14S2.DE06').answer.where(value.code =  'EmCare.B14S2.DE08').exists() )"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE13",
+            "text": "Type of Skin Problem",
+            "type": "choice",
+            "required": false,
+            "repeats": true,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/skin-pb"
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE19').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE19a",
+            "text": "Scalp Infection (tinea capitis)",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE22').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE22A",
+            "text": "Severe rash",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE23').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE23a",
+            "text": "Disseminated Herpes Zoster",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE23').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE24",
+            "text": "Eye Involvement",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE25').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE30",
+            "text": "Skin Infection extends to Muscle",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE25').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE30b",
+            "text": "Extensive impetigo lesions",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE31').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE31a",
+            "text": "Extensive molluscum lesions",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE31').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE31b",
+            "text": "Molluscum lesions close to the eye",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE32').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE32a",
+            "text": "Extensive warts",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE33').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE34",
+            "text": "Severe Seborrhoeic Dermatitis",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE36').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE36a",
+            "text": "Secondary bacterial infection of eczema",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE36').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE36b",
+            "text": "Severe acute moist or weeping eczema",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='EmCare.B14S2.DE13').answer.where(value.code='EmCare.B14S2.DE36').exists()"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE36c",
+            "text": "Secondary herpes infection of eczema (eczema herpeticum)",
+            "type": "boolean",
+            "required": false,
+            "repeats": false
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Fever').answer.first().value = true"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE38",
+            "text": "Oral sores or Mouth Ulcers",
+            "type": "choice",
+            "required": true,
+            "repeats": false,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/oral-sores"
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+                    "valueCodeableConcept": {
+                        "coding": [
+                            {
+                                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                                "code": "check-box",
+                                "display": "Check-box"
+                            }
+                        ],
+                        "text": "Check-box"
+                    }
+                },
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-enableWhenExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "%resource.repeat(item).where(linkId='Danger Signs').answer.first().value = false"
+                    }
+                }
+            ],
+            "linkId": "EmCare.B14S2.DE43",
+            "text": "Add a Skin or Mouth or Eye Problem",
+            "type": "choice",
+            "required": false,
+            "repeats": true,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/add-pb"
+        },
+        {
+            "linkId": "EmCare.B15S2.DE01",
+            "text": "Palmar Pallor",
+            "type": "choice",
+            "required": true,
+            "repeats": false,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/palmar-pallor"
+        },
+        {
+            "linkId": "EmCare.B15S2.DE09",
+            "text": "Mucous membrane pallor",
+            "type": "choice",
+            "required": true,
+            "repeats": false,
+            "answerValueSet": "https://fhir.dk.swisstph-mis.ch/matchbox/fhir/ValueSet/mucus-membrane-pallor"
+        },
+        {
+            "extension": [
+                {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression",
+                    "valueExpression": {
+                        "language": "text/fhirpath",
+                        "expression": "now()"
+                    }
+                },
+                {
+                    "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+                    "valueBoolean": true
+                }
+            ],
+            "linkId": "timestamp",
+            "type": "dateTime",
+            "required": false
+        }
+    ]
+}
