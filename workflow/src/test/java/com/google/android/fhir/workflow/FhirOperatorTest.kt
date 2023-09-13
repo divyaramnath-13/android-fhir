@@ -23,6 +23,7 @@ import com.google.android.fhir.FhirEngine
 import com.google.android.fhir.FhirEngineProvider
 import com.google.android.fhir.knowledge.ImplementationGuide
 import com.google.android.fhir.knowledge.KnowledgeManager
+import com.google.android.fhir.search.search
 import com.google.android.fhir.workflow.testing.CqlBuilder
 import com.google.android.fhir.workflow.testing.FhirEngineProviderTestRule
 import com.google.common.truth.Truth.assertThat
@@ -32,10 +33,13 @@ import java.lang.IllegalArgumentException
 import java.util.TimeZone
 import kotlin.reflect.KSuspendFunction1
 import org.hl7.fhir.r4.model.Bundle
+import org.hl7.fhir.r4.model.CarePlan
 import org.hl7.fhir.r4.model.Library
 import org.hl7.fhir.r4.model.MetadataResource
+import org.hl7.fhir.r4.model.RequestGroup
 import org.hl7.fhir.r4.model.Resource
 import org.hl7.fhir.r4.model.ResourceType
+import org.hl7.fhir.r4.model.Task
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -144,7 +148,23 @@ class FhirOperatorTest {
       fhirOperator.generateCarePlan(
         planDefinitionId = "Plan-Definition-Example",
         patientId = "Patient/Female-Patient-Example"
-      )
+      ) as CarePlan
+
+    val requestManager = RequestManager(fhirEngine, fhirContext)
+    for (request in carePlan.contained) {
+      if (request is RequestGroup) {
+        requestManager.createRequestFromRequestGroup(request)
+      }
+    }
+
+    val tasks = fhirEngine.search("Task")
+    requestManager.updateStatus(tasks[0], RequestGroup.RequestStatus.ACTIVE)
+    requestManager.updateIntent(tasks[0], RequestGroup.RequestIntent.PLAN)
+    print(jsonParser.encodeResourceToString(tasks[0] as Task))
+
+    val newTasks = fhirEngine.search("Task")
+    print(jsonParser.encodeResourceToString(newTasks[0] as Task))
+    print(jsonParser.encodeResourceToString(newTasks[1] as Task))
 
     assertEquals(
       readResourceAsString("/plan-definition/cql-applicability-condition/care_plan.json"),
