@@ -2,11 +2,29 @@ package com.google.android.fhir.workflow
 
 import org.hl7.fhir.r4.model.RequestGroup
 import org.hl7.fhir.r4.model.RequestGroup.RequestStatus
+import org.hl7.fhir.r4.model.Resource
+import org.hl7.fhir.r4.model.ResourceType
 import org.hl7.fhir.r4.model.Task
+
+interface RequestHandler {
+  fun acceptProposedRequest(request: Resource): Boolean {
+    return true
+  }
+}
 
 class RequestUtils {
 
   companion object  {
+
+    fun isValidRequest(resourceType: ResourceType): Boolean {
+      return when (resourceType) {
+        ResourceType.Task, ResourceType.MedicationRequest, ResourceType.ServiceRequest, ResourceType.CommunicationRequest -> true
+        else -> false
+      }
+    }
+
+    // valid status change:
+    // do by resource and then valid next states for present state
     fun mapTaskStatusToRequestStatus(taskStatus: Task.TaskStatus): RequestStatus {
       val requestStatus = when (taskStatus) {
         Task.TaskStatus.DRAFT -> RequestStatus.DRAFT

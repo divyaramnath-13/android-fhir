@@ -135,6 +135,7 @@ class FhirOperatorTest {
     )
   }
 
+
   @Test
   fun generateCarePlanWithCqlApplicabilityCondition() = runBlockingOnWorkerThread {
     loadFile("/plan-definition/cql-applicability-condition/patient.json", ::importToFhirEngine)
@@ -150,7 +151,8 @@ class FhirOperatorTest {
         patientId = "Patient/Female-Patient-Example"
       ) as CarePlan
 
-    val requestManager = RequestManager(fhirEngine, fhirContext)
+    val testRequestHandler = TestRequestHandler()
+    val requestManager = RequestManager(fhirEngine, fhirContext, testRequestHandler)
     for (request in carePlan.contained) {
       if (request is RequestGroup) {
         requestManager.createRequestFromRequestGroup(request)
@@ -158,7 +160,7 @@ class FhirOperatorTest {
     }
 
     val tasks = fhirEngine.search("Task")
-    requestManager.updateStatus(tasks[0], RequestGroup.RequestStatus.ACTIVE)
+    // requestManager.updateStatus(tasks[0], RequestGroup.RequestStatus.ACTIVE)
     requestManager.updateIntent(tasks[0], RequestGroup.RequestIntent.PLAN)
     print(jsonParser.encodeResourceToString(tasks[0] as Task))
 
