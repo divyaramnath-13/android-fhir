@@ -170,6 +170,56 @@ class FhirOperatorTest {
   }
 
   @Test
+  fun debug() = runBlockingOnWorkerThread {
+
+    loader.loadFile(
+      "/plan-definition/debug/patient.json",
+      ::importToFhirEngine,
+    )
+    loader.loadFile(
+      "/plan-definition/debug/practitioner_role.json",
+      ::importToFhirEngine,
+    )
+    loader.loadFile(
+      "/plan-definition/debug/PatientDataCollection-1.0.1.cql",
+      ::installToIgManager,
+    )
+    loader.loadFile(
+      "/plan-definition/debug/plan_definition.json",
+      ::installToIgManager,
+    )
+    loader.loadFile(
+      "/plan-definition/debug/activity_definition.json",
+      ::installToIgManager,
+    )
+
+    val carePlan =
+      fhirOperator.generateCarePlan(
+        planDefinitionCanonical =
+          CanonicalType("http://example.com/PlanDefinition/plandef-patient-test"),
+        subject = "Patient/Female-Patient-Example")
+
+//    Uncomment the lines below if the "prefix" parameter needs to be passed
+//    val carePlan =
+//      fhirOperator.generateCarePlan(
+//        planDefinitionCanonical =
+//          CanonicalType("http://example.com/PlanDefinition/plandef-patient-test"),
+//        subject = "Patient/Female-Patient-Example",
+//        parameters=Parameters().apply {
+//          addParameter().apply {
+//            name = "prefix"
+//            value = StringType("Example")
+//          }
+//        })
+
+    assertEquals(
+      loader.readResourceAsString("/plan-definition/debug/care_plan.json"),
+      jsonWriter.setPrettyPrint(true).encodeResourceToString(carePlan),
+      true,
+    )
+  }
+
+  @Test
   @Ignore("Bug on workflow incorrectly returns 2022-12-31T00:00:00 instead of 2021-12-31T23:59:59")
   fun evaluatePopulationMeasure() = runBlockingOnWorkerThread {
     loader.loadFile(

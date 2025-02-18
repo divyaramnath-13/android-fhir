@@ -1,0 +1,67 @@
+{
+  "resourceType": "CarePlan",
+  "id": "plandef-patient-test",
+  "contained": [ {
+    "resourceType": "RequestGroup",
+    "id": "plandef-patient-test",
+    "instantiatesCanonical": [ "http://example.com/PlanDefinition/plandef-patient-test" ],
+    "status": "draft",
+    "intent": "proposal",
+    "subject": {
+      "reference": "Patient/Female-Patient-Example"
+    },
+    "action": [ {
+      "id": "collect-questionnaire",
+      "title": "Collect Patient Questionnaire",
+      "condition": [ {
+        "kind": "applicability",
+        "expression": {
+          "language": "text/cql.identifier",
+          "expression": "True"
+        }
+      } ],
+      "resource": {
+        "reference": "Task/collect-questionnaire"
+      }
+    } ]
+  }, {
+    "resourceType": "Task",
+    "id": "collect-questionnaire",
+    "instantiatesCanonical": "http://example.com/ActivityDefinition/actdef-collect-questionnaire|1",
+    "basedOn": [ {
+      "reference": "RequestGroup/plandef-patient-test"
+    } ],
+    "status": "draft",
+    "intent": "order",
+    "code": {
+      "coding": [ {
+        "code": "collect-sc",
+        "display": "Collect Patient Data"
+      } ]
+    },
+    "for": {
+      "reference": "Patient/Female-Patient-Example"
+    },
+    "requester": {
+      "reference": "PractitionerRole/example",
+      "type": "PractitionerRole",
+      "display": "General medical practice"
+    },
+    "owner": {
+      "reference": "PractitionerRole/example",
+      "type": "PractitionerRole",
+      "display": "General medical practice"
+    }
+  } ],
+  "instantiatesCanonical": [ "http://example.com/PlanDefinition/plandef-patient-test" ],
+  "status": "draft",
+  "intent": "proposal",
+  "subject": {
+    "reference": "Patient/Female-Patient-Example"
+  },
+  "activity": [ {
+    "reference": {
+      "reference": "#RequestGroup/plandef-patient-test"
+    }
+  } ]
+}

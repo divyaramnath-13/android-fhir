@@ -1,0 +1,47 @@
+{
+  "resourceType": "ActivityDefinition",
+  "id": "actdef-collect-questionnaire",
+  "version":"1",
+  "status": "active",
+  "kind": "Task",
+  "intent": "order",
+  "url":"http://example.com/ActivityDefinition/actdef-collect-questionnaire",
+  "library": [
+    "http://example.com/Library/PatientDataCollection|1.0.1"
+  ],
+  "code": {
+    "coding": [{
+      "code": "collect-sc",
+      "display": "Collect Patient Data"
+    }
+    ]
+  },
+  "priority": "routine",
+  "performerType": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/task-performer-type",
+          "code": "practitioner",
+          "display": "Practitioner"
+        }
+      ]
+    }
+  ],
+  "dynamicValue":[
+    {
+      "path": "requester",
+      "expression": {
+        "language": "text/cql.identifier",
+        "expression": "Get PractitionerRole Reference"
+      }
+    },
+    {
+      "path": "owner",
+      "expression": {
+        "language": "text/cql.identifier",
+        "expression": "Get PractitionerRole Reference"
+      }
+    }
+  ]
+}
